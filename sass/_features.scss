@@ -1,0 +1,31 @@
+.features {
+  //   background-color: blue;
+  grid-column: center-start / col-end 8;
+
+  margin: 15rem 0;
+
+  display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+grid-template-columns: repeat(auto-fill,minmax(25rem,1fr));
+  grid-template-rows: auto auto;
+  grid-gap: 6rem;
+}
+.feature {
+  // background-color: red;
+  grid-template-columns: min-content 1fr;
+  display: grid;
+  grid-row-gap: 1rem;
+  grid-column-gap: 2.5rem;
+//   align-content: center;
+  align-items: start;
+
+  &__icon {
+    fill: $color-primary;
+    height: 4.5rem;
+    width: 4.5rem;
+    grid-row: 1 / span 2;
+  }
+  &__text {
+    font-size: 1.7rem;
+  }
+}
