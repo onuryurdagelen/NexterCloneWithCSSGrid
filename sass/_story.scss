@@ -63,5 +63,6 @@
   &__text {
     font-size: 2rem;
     font-size: italic;
+    @extend %text-center;
   }
 }

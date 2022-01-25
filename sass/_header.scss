@@ -25,6 +25,7 @@
     &__btn{
         align-self: start;
         justify-self: start;
+        @extend %heading-media;
     }
     &__seenon-text{
         display:grid;

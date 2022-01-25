@@ -30,14 +30,6 @@ body {
     .container {
       grid-template-rows: 6rem calc(100vh - 6rem); } }
 
-@media only screen and (max-width: 50em) {
-  .heading-3, .heading-1, .header__btn {
-    text-align: center;
-    justify-self: center !important; } }
-
-.heading-2, .story__text {
-  text-align: center; }
-
 .heading-4, .heading-3, .heading-2, .heading-1 {
   font-family: "Nunito", sans-serif;
   font-weight: 800; }
@@ -53,7 +45,8 @@ body {
   font-size: 1.6rem;
   color: #c69963;
   text-transform: uppercase;
-  line-height: 1; }
+  line-height: 1;
+  text-align: center; }
 
 .heading-2 {
   font-size: 4rem;
@@ -195,6 +188,9 @@ body {
     grid-column-gap: 2rem;
     grid-row-gap: 5vh;
     align-items: center; }
+    @media only screen and (max-width: 50em) {
+      .realtors__list {
+        grid-template-columns: repeat(3, min-content max-content); } }
   .realtors__img {
     width: 7rem;
     border-radius: 50%;
