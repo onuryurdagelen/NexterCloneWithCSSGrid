@@ -20,6 +20,7 @@ body {
 
 .container {
   display: grid;
+  position: relative;
   grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
   grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end]; }
   @media only screen and (max-width: 62.5em) {
@@ -29,6 +30,21 @@ body {
   @media only screen and (max-width: 50em) {
     .container {
       grid-template-rows: 6rem calc(100vh - 6rem); } }
+
+.container.active {
+  overflow: hidden; }
+
+.wrapper {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  position: fixed;
+  display: none;
+  z-index: 2; }
+
+.wrapper.active {
+  display: block; }
 
 @media only screen and (max-width: 50em) {
   .heading-3, .heading-1, .header__btn {
@@ -98,24 +114,80 @@ body {
   grid-column: sidebar-start / sidebar-end;
   grid-row: 1 / -1;
   display: grid;
-  justify-content: center; }
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: -120px;
+  min-width: 200px;
+  justify-content: center;
+  z-index: 99999;
+  transition: all .6s ease-in-out; }
+  .sidebar .content {
+    position: fixed;
+    top: 50%;
+    left: -50%;
+    transform: translate(-50%, -50%);
+    transition: all .5s ease-in-out; }
+    .sidebar .content ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column; }
+      .sidebar .content ul li a {
+        color: #fff;
+        font-size: 4rem;
+        text-decoration: underline; }
+        @media only screen and (max-width: 50em) {
+          .sidebar .content ul li a {
+            font-size: 3rem; } }
+    @media only screen and (max-width: 50em) {
+      .sidebar .content {
+        left: 50%;
+        top: 20%;
+        display: none; } }
+  .sidebar .content.active {
+    left: 5%; }
+    @media only screen and (max-width: 50em) {
+      .sidebar .content.active {
+        left: 50%;
+        top: 20%;
+        display: block;
+        animation-name: animatedContent;
+        animation-duration: .6s; } }
+
+@keyframes animatedContent {
+  from {
+    transform: translate(-50%, -100%); }
+  to {
+    transform: translate(-50%, -50%); } }
   @media only screen and (max-width: 62.5em) {
     .sidebar {
       grid-column: 1 / -1;
       grid-row: 1 / 2;
       justify-content: flex-end;
       align-items: center; } }
+  @media only screen and (max-width: 50em) {
+    .sidebar {
+      top: -100%;
+      left: 0;
+      width: 100%;
+      background-color: transparent;
+      transition: all .3s ease-in-out; } }
 
 .nav-btn {
   border: none;
   border-radius: 0;
   background-color: #fff;
-  height: 2px;
+  height: 3px;
   width: 4.5rem;
-  margin-top: 4rem; }
+  margin-top: 4rem;
+  cursor: pointer;
+  position: fixed;
+  top: -6px;
+  left: 13px;
+  transition: all .6s ease-in-out; }
   .nav-btn::before, .nav-btn::after {
     background-color: #fff;
-    height: 2px;
+    height: 3px;
     width: 4.5rem;
     content: '';
     display: block; }
@@ -131,6 +203,55 @@ body {
         transform: translateY(-1.2rem); }
       .nav-btn::after {
         transform: translateY(1rem); } }
+  @media only screen and (max-width: 50em) {
+    .nav-btn {
+      visibility: visible;
+      top: 2%;
+      z-index: 2; } }
+
+.nav-btn.active {
+  left: 4%;
+  animation-name: animatedHamburgerLeft;
+  animation-duration: .6s;
+  transform: rotate(28deg); }
+  .nav-btn.active::before, .nav-btn.active::after {
+    background-color: #fff;
+    height: 3px;
+    width: 4.5rem;
+    content: '';
+    display: block; }
+  .nav-btn.active::before {
+    transform: rotate(-55deg);
+    animation-name: animatedHamburgerRight;
+    animation-duration: .6s;
+    display: block; }
+  .nav-btn.active::after {
+    display: none; }
+
+@keyframes animatedHamburgerRight {
+  from {
+    transform: rotate(-55deg); }
+  to {
+    transform: rotate(55deg); } }
+
+@keyframes animatedHamburgerLeft {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(-28deg); } }
+
+.sidebar.active {
+  left: 0;
+  position: fixed; }
+  @media only screen and (max-width: 50em) {
+    .sidebar.active {
+      visibility: visible;
+      background-color: #000;
+      display: block;
+      opacity: .7;
+      height: 300px;
+      top: 0;
+      min-width: 100%; } }
 
 .header {
   background-color: #54483A;
@@ -146,7 +267,9 @@ body {
   grid-row-gap: 1.5rem; }
   @media only screen and (max-width: 50em) {
     .header {
-      grid-column: 1 / -1; } }
+      grid-column: 1 / -1;
+      grid-row: 1 / 3;
+      z-index: 2; } }
   .header__logo {
     height: 3rem;
     justify-self: center; }
